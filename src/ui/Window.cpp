@@ -1,4 +1,6 @@
 #include "Window.hpp"
+#include <glad/glad.h>
+#include <glfw/glfw3.h>
 
 namespace ssg {
     Window::Window(u16 width, u16 height, const std::string& title) : title(title) {

@@ -1,7 +1,7 @@
 #pragma once
 #include "Window.hpp"
 
-#define SS_APPLICATION(Type) std::unique_ptr<Application> createApp() {return std::make_unique<Type>()}
+#define SS_APPLICATION(Type) std::unique_ptr<ssg::Application> createApp() {return std::make_unique<Type>();}
 
 namespace ssg {
     struct WindowParams {

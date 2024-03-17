@@ -1,6 +1,8 @@
 #pragma once
 #include "Core.hpp"
 
+struct GLFWwindow;
+
 namespace ssg {
     class Window {
     public:

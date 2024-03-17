@@ -1,4 +1,5 @@
 #include "Application.hpp"
+#include <glad/glad.h>
 
 namespace ssg {
     Application::Application(const WindowParams& wndParams, bool setupDockspace) {
@@ -9,6 +10,9 @@ namespace ssg {
         init();
 
         while (!window->shouldClose()) {
+            glClearColor(0.2f, 0.6f, 0.2f, 1.f);
+            glClear(GL_COLOR_BUFFER_BIT);
+
             renderUI();
 
             window->swapBuffers();

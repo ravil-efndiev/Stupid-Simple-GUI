@@ -8,9 +8,6 @@
 #include <unordered_map>
 #include <stdlib.h>
 
-#include <glad/glad.h>
-#include <glfw/glfw3.h>
-
 #define SS_ASSERT(condition, errorText) if (!(condition)) {PrintErr(errorText); exit(1);}
 
 namespace ssg {
@@ -31,12 +28,13 @@ namespace ssg {
 
     template <class... Args>
     void Print(const std::string& fmt, Args&&... args) {
-        (void)printf(fmt.c_str(), args...);
+        std::string fmtout = fmt + "\n";
+        (void)printf(fmtout.c_str(), args...);
     }
 
     template <class... Args>
     void PrintErr(const std::string& fmt, Args&&... args) {
-        std::string fmterr = "Error: " + fmt;
+        std::string fmterr = "Error: " + fmt + "\n";
         (void)fprintf(stderr, fmterr.c_str(), args...);
     }
 }
