@@ -1,0 +1,5 @@
+build/
+.vscode/
+
+# project to test library
+test/
