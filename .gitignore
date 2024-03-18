@@ -1,5 +1,5 @@
 build/
 .vscode/
-
-# project to test library
 test/
+
+make_run_test.sh

@@ -1,8 +1,9 @@
 #include "Window.hpp"
+#include "OpenGLAPI.hpp"
 #include <glad/glad.h>
-#include <glfw/glfw3.h>
+#include <GLFW/glfw3.h>
 
-namespace ssg {
+namespace ssgui {
     Window::Window(u16 width, u16 height, const std::string& title) : title(title) {
         initGlfw();
         createWindow(width, height);   
@@ -14,7 +15,6 @@ namespace ssg {
     
     void Window::initGlfw() {
         bool initSuccess = glfwInit();
-
         SS_ASSERT(initSuccess, "failed to init glfw")
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -33,6 +33,12 @@ namespace ssg {
         SS_ASSERT(gladInitSuccess, "failed to init glad")
     }
 
+    void Window::setupEvents() {
+        glfwSetWindowSizeCallback(window, [](GLFWwindow* window, i32 width, i32 height) {
+            OpenGLAPI::setViewport({width, height});
+        });
+    }
+
     bool Window::shouldClose() const {
         return glfwWindowShouldClose(window);
     }
@@ -45,4 +51,7 @@ namespace ssg {
         glfwPollEvents();
     }
 
+    GLFWwindow* Window::getWindowPtr() {
+        return window;
+    }
 }

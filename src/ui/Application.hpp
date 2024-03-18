@@ -1,9 +1,12 @@
 #pragma once
 #include "Window.hpp"
+#include "Vector.hpp"
+#include <imgui.h>
 
-#define SS_APPLICATION(Type) std::unique_ptr<ssg::Application> createApp() {return std::make_unique<Type>();}
+#define SS_APPLICATION(Type) \
+    void createApp() {Application::Create<Type>();}
 
-namespace ssg {
+namespace ssgui {
     struct WindowParams {
         u16 Width;
         u16 Height;
@@ -12,6 +15,13 @@ namespace ssg {
 
     class Application {
     public:
+        template<class AppT, class... Args>
+        static void Create(Args&&... args) {
+            App = std::make_unique<AppT>(args...);
+        }
+
+        static Application* Get() {return App.get();}
+    
         Application(const WindowParams& wndParams, bool setupDockspace);
         virtual ~Application() {}
 
@@ -20,12 +30,16 @@ namespace ssg {
 
         Status start();
 
+        void setClearColor(const Vector4& color);
+        void setImGuiStyle(const std::function<void(ImGuiIO&, ImGuiStyle&)>& styleFunc);
+
     private:
         std::unique_ptr<Window> window;
-
+        Vector4 clearColor;
+        static std::unique_ptr<Application> App;
     };
 
-    extern std::unique_ptr<Application> createApp();
+    extern void createApp();
 
 }
 

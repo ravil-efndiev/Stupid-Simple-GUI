@@ -3,7 +3,7 @@
 
 struct GLFWwindow;
 
-namespace ssg {
+namespace ssgui {
     class Window {
     public:
         Window(u16 width, u16 height, const std::string& title);
@@ -13,9 +13,12 @@ namespace ssg {
         void swapBuffers();
         void pollEvents();
 
+        GLFWwindow* getWindowPtr();
+
     private:
         void initGlfw();
         void createWindow(u16 width, u16 height);
+        void setupEvents();
 
     private:
         GLFWwindow* window;
