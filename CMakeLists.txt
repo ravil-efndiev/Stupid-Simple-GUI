@@ -10,9 +10,11 @@ add_library(ssgui STATIC
     src/ui/Window.cpp   
     src/ui/OpenGLAPI.cpp   
     src/ui/ImguiControlls.cpp   
+    src/ui/Image.cpp   
 
     # dependencies
     vendor/lib/glad/glad.c
+    vendor/lib/stb_image/stb_image.cpp
     vendor/modules/imgui/imgui.cpp
     vendor/modules/imgui/backends/imgui_impl_opengl3.cpp
     vendor/modules/imgui/backends/imgui_impl_glfw.cpp

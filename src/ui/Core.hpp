@@ -41,5 +41,22 @@ namespace ssgui {
         std::string fmterr = "Error: " + fmt + "\n";
         (void)fprintf(stderr, fmterr.c_str(), std::forward<Args>(args)...);
     }
+
+    // OpenGL types because I dont want to include glad.h in header files
+    
+    typedef u32  GLbitfield;
+    typedef u8   GLboolean;
+    typedef i8   GLbyte;
+    typedef f32  GLclampf;
+    typedef u32  GLenum;
+    typedef f32  GLfloat;
+    typedef i32  GLint;
+    typedef i16  GLshort;
+    typedef i32  GLsizei;
+    typedef u8   GLubyte;
+    typedef u32  GLuint;
+    typedef u16  GLushort;
+    typedef void GLvoid;
+
 }
 

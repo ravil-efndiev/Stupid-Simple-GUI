@@ -22,7 +22,7 @@ namespace ssgui {
 
         static Application* Get() {return App.get();}
     
-        Application(const WindowParams& wndParams, bool setupDockspace);
+        Application(const WindowParams& wndParams, bool useDockspace = true);
         virtual ~Application() {}
 
         virtual void init() = 0;
@@ -33,9 +33,12 @@ namespace ssgui {
         void setClearColor(const Vector4& color);
         void setImGuiStyle(const std::function<void(ImGuiIO&, ImGuiStyle&)>& styleFunc);
 
+        bool UseDockspace;
+
     private:
         std::unique_ptr<Window> window;
         Vector4 clearColor;
+
         static std::unique_ptr<Application> App;
     };
 

@@ -50,7 +50,7 @@ namespace ssgui {
         }
 
         union {T x, r;};
-        union {T y, b;};
+        union {T y, g;};
     };
 
     template <class T>
@@ -108,8 +108,8 @@ namespace ssgui {
         }
 
         union {T x, r;};
-        union {T y, b;};
-        union {T z, g;};
+        union {T y, g;};
+        union {T z, b;};
     };
 
     template <class T>
@@ -181,8 +181,8 @@ namespace ssgui {
         }
 
         union {T x, r;};
-        union {T y, b;};
-        union {T z, g;};
+        union {T y, g;};
+        union {T z, b;};
         union {T w, a;};
     };
 

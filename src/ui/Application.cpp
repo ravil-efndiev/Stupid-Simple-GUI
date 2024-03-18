@@ -5,7 +5,8 @@
 namespace ssgui {
     std::unique_ptr<Application> Application::App;
 
-    Application::Application(const WindowParams& wndParams, bool setupDockspace) {
+    Application::Application(const WindowParams& wndParams, bool useDockspace) 
+        : UseDockspace(useDockspace) {
         window = std::make_unique<Window>(wndParams.Width, wndParams.Height, wndParams.Title);
     }
 
@@ -17,6 +18,9 @@ namespace ssgui {
             OpenGLAPI::clear(clearColor);
 
             imguiNewFrame();
+            if (UseDockspace)
+                imguiDockspace();
+                
             renderUI();
             renderImgui();
 
@@ -36,5 +40,4 @@ namespace ssgui {
     void Application::setImGuiStyle(const std::function<void(ImGuiIO&, ImGuiStyle&)>& styleFunc) {
         setImguiStyle(styleFunc);
     }
-
 }

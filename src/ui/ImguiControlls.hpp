@@ -10,6 +10,7 @@ namespace ssgui {
     void initImgui(GLFWwindow* window);    
     void setImguiStyle(const std::function<void(ImGuiIO&, ImGuiStyle&)>& styleFunc);    
     void shutdownImgui();
+    void imguiDockspace();
     void imguiNewFrame();
     void renderImgui();
 }
