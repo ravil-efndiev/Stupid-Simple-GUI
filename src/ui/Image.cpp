@@ -26,14 +26,14 @@ namespace ssgui {
 
     Image::Image(const std::string &path)
         : path(path) {       
-        loadTexture(path);
+        loadFromFile(path);
     }
 
     Image::~Image() {
         glDeleteTextures(1, &textureId);
     }
 
-    void Image::loadTexture(const std::string& path) {
+    void Image::loadFromFile(const std::string& path) {
         stbi_set_flip_vertically_on_load(true);
 
         textureData = stbi_load(path.c_str(), &width, &height, &channels, 0);
@@ -81,34 +81,5 @@ namespace ssgui {
 
     bool Image::operator==(const Image& tex) const {
         return path == "" ? textureId == tex.textureId : path == tex.path;
-    }
-
-    GLuint Image::imageFromFile(const std::string& path) {
-        GLuint textureId;
-        i32 width, height, channels;
-
-        stbi_set_flip_vertically_on_load(true);
-        u8* textureData = stbi_load(path.c_str(), &width, &height, &channels, 0);
-        SS_ASSERT(textureData, "Image: unable to load texture from file")
-
-        glGenTextures(1, &textureId);
-        glBindTexture(GL_TEXTURE_2D, textureId);
-
-        SS_ASSERT(channels == 3 || channels == 4, "Image: unsupported texture format");
-
-        GLenum dataFormat = channels == 3 ? GL_RGB : GL_RGBA;
-        GLenum internalFormat = channels == 3 ? GL_RGB8 : GL_RGBA8;
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-        glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, dataFormat, GL_UNSIGNED_BYTE, textureData);
-        glGenerateMipmap(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, 0);
-
-        stbi_image_free(textureData);
-        return textureId;
     }
 }

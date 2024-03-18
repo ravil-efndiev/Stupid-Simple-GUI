@@ -10,7 +10,7 @@ namespace ssgui {
         Image(const Image& tex) = delete;
         ~Image();
 
-        void loadTexture(const std::string& path);
+        void loadFromFile(const std::string& path);
         void setData(u8* data, i32 channels);
 
         i32 getWidth() const;
@@ -20,9 +20,6 @@ namespace ssgui {
         std::string getPath() const;
 
         bool operator== (const Image& tex) const;
-
-    public:
-        static GLuint imageFromFile(const std::string& path);
 
     private:
         GLuint textureId;
