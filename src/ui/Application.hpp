@@ -17,7 +17,7 @@ namespace ssgui {
     public:
         template<class AppT, class... Args>
         static void Create(Args&&... args) {
-            App = std::make_unique<AppT>(args...);
+            App = std::make_unique<AppT>(std::forward<Args>(args)...);
         }
 
         static Application* Get() {return App.get();}

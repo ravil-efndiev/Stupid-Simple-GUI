@@ -176,7 +176,7 @@ namespace ssgui {
             return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2) + pow(w, 2));
         }
 
-        Vector<T, 2> xyz() {
+        Vector<T, 3> xyz() {
             return {x, y, z};
         }
 

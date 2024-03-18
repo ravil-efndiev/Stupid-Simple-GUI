@@ -33,13 +33,13 @@ namespace ssgui {
     template <class... Args>
     void Print(const std::string& fmt, Args&&... args) {
         std::string fmtout = fmt + "\n";
-        (void)printf(fmtout.c_str(), args...);
+        (void)printf(fmtout.c_str(), std::forward<Args>(args)...);
     }
 
     template <class... Args>
     void PrintErr(const std::string& fmt, Args&&... args) {
         std::string fmterr = "Error: " + fmt + "\n";
-        (void)fprintf(stderr, fmterr.c_str(), args...);
+        (void)fprintf(stderr, fmterr.c_str(), std::forward<Args>(args)...);
     }
 }
 
