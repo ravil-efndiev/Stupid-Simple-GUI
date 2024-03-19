@@ -8,11 +8,13 @@ add_library(ssgui STATIC
     # source files
     src/ui/Application.cpp   
     src/ui/Window.cpp   
+    src/ui/General.cpp   
     src/ui/OpenGLAPI.cpp   
     src/ui/ImguiControlls.cpp   
     src/ui/Image.cpp   
-    src/ui/GuiElements.cpp   
-    src/ui/General.cpp   
+    src/ui/ElementsGeneral.cpp   
+    src/ui/ElementsDrags.cpp   
+    src/ui/ElementsStyled.cpp   
 
     # dependencies
     vendor/lib/glad/glad.c

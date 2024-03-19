@@ -46,11 +46,11 @@ namespace ssgui {
             return *this;
         }
 
-        f64 magnitude() {
+        f64 magnitude() const {
             return sqrt(pow(x, 2) + pow(y, 2));
         }
 
-        ImVec2 asImgui() {
+        ImVec2 asImgui() const {
             return {x, y};
         }
 
@@ -104,11 +104,11 @@ namespace ssgui {
             return *this;
         }
 
-        f64 magnitude() {
+        f64 magnitude() const {
             return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
         }
 
-        Vector<T, 2> xy() {
+        Vector<T, 2> xy() const {
             return {x, y};
         }
 
@@ -177,15 +177,15 @@ namespace ssgui {
             return *this;
         }
 
-        f64 magnitude() {
+        f64 magnitude() const {
             return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2) + pow(w, 2));
         }
 
-        Vector<T, 3> xyz() {
+        Vector<T, 3> xyz() const {
             return {x, y, z};
         }
 
-        ImVec4 asImgui() {
+        ImVec4 asImgui() const {
             return {x, y, z, w};
         }
 

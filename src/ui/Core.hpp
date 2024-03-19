@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <functional>
+#include <optional>
 #include <stdlib.h>
 
 #define SS_ASSERT(condition, errorText) if (!(condition)) {PrintErr(errorText); exit(Status_Error);}
