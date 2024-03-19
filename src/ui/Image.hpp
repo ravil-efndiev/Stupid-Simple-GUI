@@ -22,6 +22,9 @@ namespace ssgui {
         bool operator== (const Image& tex) const;
 
     private:
+        void setTextureParams();
+
+    private:
         GLuint textureId;
         GLenum dataFormat, internalFormat;
         

@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.hpp"
+#include <imgui.h>
 
 namespace ssgui {
     template <class T, u8 Components>
@@ -47,6 +48,10 @@ namespace ssgui {
 
         f64 magnitude() {
             return sqrt(pow(x, 2) + pow(y, 2));
+        }
+
+        ImVec2 asImgui() {
+            return {x, y};
         }
 
         union {T x, r;};
@@ -178,6 +183,10 @@ namespace ssgui {
 
         Vector<T, 3> xyz() {
             return {x, y, z};
+        }
+
+        ImVec4 asImgui() {
+            return {x, y, z, w};
         }
 
         union {T x, r;};

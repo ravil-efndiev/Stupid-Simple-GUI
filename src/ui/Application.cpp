@@ -11,33 +11,45 @@ namespace ssgui {
     }
 
     Status Application::start() {
-        initImgui(window->getWindowPtr());
+        ImGuiControlls::init(window->getWindowPtr());
         init();
 
         while (!window->shouldClose()) {
-            OpenGLAPI::clear(clearColor);
+            OpenGLAPI::clear(BackgroundColor);
 
-            imguiNewFrame();
+            ImGuiControlls::newFrame();
             if (UseDockspace)
-                imguiDockspace();
+                ImGuiControlls::runDockspace();
                 
             renderUI();
-            renderImgui();
+            ImGuiControlls::render();
 
             window->swapBuffers();
             window->pollEvents();
         }
 
-        shutdownImgui();
+        ImGuiControlls::shutdown();
 
         return Status_Success;
     }
 
-    void Application::setClearColor(const Vector4& color) {
-        clearColor = color;
-    }
-
     void Application::setImGuiStyle(const std::function<void(ImGuiIO&, ImGuiStyle&)>& styleFunc) {
-        setImguiStyle(styleFunc);
+        ImGuiControlls::setStyle(styleFunc);
+    }
+    
+    ImFont* Application::addFont(const std::string& name, const std::string& pathTTF, f32 sizePixels) {
+        ImGuiIO& io = ImGui::GetIO();
+        ImFont* font = io.Fonts->AddFontFromFileTTF(pathTTF.c_str(), sizePixels);
+        ImGuiControlls::Fonts.emplace(name, font);
+        return font;
+    }
+    
+    ImFont* Application::getFont(const std::string& name) {
+        try {
+            return ImGuiControlls::Fonts.at(name);
+        }
+        catch (std::out_of_range) {
+            return nullptr;
+        }
     }
 }

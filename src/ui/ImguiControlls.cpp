@@ -1,13 +1,25 @@
 #include "ImguiControlls.hpp"
 #include "OpenGLAPI.hpp"
-#include <imgui.h>
+#include "General.hpp"
 #include <backends/imgui_impl_opengl3.h>
 #include <backends/imgui_impl_glfw.h>
 #include <GLFW/glfw3.h>
 
 namespace ssgui {
-    void setStandartStyle(ImGuiIO& io, ImGuiStyle& style) {
-        io.FontDefault = io.Fonts->AddFontFromFileTTF("./assets/fonts/FixelText-Medium.ttf", 15.f);
+    std::unordered_map<std::string, ImFont*> ImGuiControlls::Fonts;
+
+    void ImGuiControlls::setStandartStyle(ImGuiIO& io, ImGuiStyle& style) {
+        const char* defaultFontPath = "./assets/fonts/FixelText-Medium.ttf";
+        if (fileExists(defaultFontPath)) {
+            io.FontDefault = io.Fonts->AddFontFromFileTTF(defaultFontPath, 16.f);
+            Fonts.emplace("default-16px", io.FontDefault);
+            Fonts.emplace("default-14px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 14.f));
+            Fonts.emplace("default-18px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 18.f));
+            Fonts.emplace("default-20px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 20.f));
+            Fonts.emplace("default-24px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 24.f));
+            Fonts.emplace("default-30px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 30.f));
+        }
+
         style.Colors[ImGuiCol_Text]                  = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
         style.Colors[ImGuiCol_TextDisabled]          = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
         style.Colors[ImGuiCol_WindowBg]              = ImVec4(0.13f, 0.14f, 0.15f, 1.00f);
@@ -60,7 +72,7 @@ namespace ssgui {
         style.Colors[ImGuiCol_ModalWindowDimBg]      = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
     }
 
-    void initImgui(GLFWwindow* window) {
+    void ImGuiControlls::init(GLFWwindow* window) {
         IMGUI_CHECKVERSION();
             
         ImGui::CreateContext();
@@ -77,23 +89,23 @@ namespace ssgui {
         setStandartStyle(io, ImGui::GetStyle());
     }
 
-    void setImguiStyle(const std::function<void(ImGuiIO&, ImGuiStyle&)>& styleFunc) {
+    void ImGuiControlls::setStyle(const std::function<void(ImGuiIO&, ImGuiStyle&)>& styleFunc) {
         styleFunc(ImGui::GetIO(), ImGui::GetStyle());
     }
 
-    void shutdownImgui() {
+    void ImGuiControlls::shutdown() {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
     }
 
-    void imguiNewFrame() {
+    void ImGuiControlls::newFrame() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
     }
 
-    void renderImgui() {
+    void ImGuiControlls::render() {
         ImGuiIO& io = ImGui::GetIO();
 
         Vector2i viewport = OpenGLAPI::getViewport();
@@ -110,7 +122,7 @@ namespace ssgui {
         }
     }
 
-    void imguiDockspace() {
+    void ImGuiControlls::runDockspace() {
         static bool dockspaceOpen = true;
         static bool optFullscreen = true;
         static bool optPadding = false;

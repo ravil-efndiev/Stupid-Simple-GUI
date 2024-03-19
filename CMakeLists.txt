@@ -11,6 +11,8 @@ add_library(ssgui STATIC
     src/ui/OpenGLAPI.cpp   
     src/ui/ImguiControlls.cpp   
     src/ui/Image.cpp   
+    src/ui/GuiElements.cpp   
+    src/ui/General.cpp   
 
     # dependencies
     vendor/lib/glad/glad.c
@@ -30,9 +32,13 @@ target_include_directories(ssgui PUBLIC
     src/ui/
     vendor/include/
     vendor/modules/imgui/
+    vendor/modules/nativefiledialog/src/include/
 )
 
-target_link_libraries(ssgui ${CMAKE_CURRENT_SOURCE_DIR}/vendor/lib/glfw/libglfw3.a)
+target_link_libraries(ssgui 
+    ${CMAKE_CURRENT_SOURCE_DIR}/vendor/lib/glfw/libglfw3.a
+    ${CMAKE_CURRENT_SOURCE_DIR}/vendor/modules/nativefiledialog/build/lib/Release/x64/libnfd.a
+)
 
 set(CMAKE_BUILD_TYPE Release)
 

@@ -30,14 +30,16 @@ namespace ssgui {
 
         Status start();
 
-        void setClearColor(const Vector4& color);
         void setImGuiStyle(const std::function<void(ImGuiIO&, ImGuiStyle&)>& styleFunc);
 
+        ImFont* addFont(const std::string& name, const std::string& pathTTF, f32 sizePixels);
+        ImFont* getFont(const std::string& name);
+
         bool UseDockspace;
+        Vector4 BackgroundColor;
 
     private:
         std::unique_ptr<Window> window;
-        Vector4 clearColor;
 
         static std::unique_ptr<Application> App;
     };
