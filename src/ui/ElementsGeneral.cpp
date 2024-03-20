@@ -7,14 +7,14 @@
 
 namespace ssgui {
     void beginMainWindow() {
-		static ImGuiWindowFlags mainFlags =
-        	ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse
+        static ImGuiWindowFlags mainFlags =
+            ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse
             | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
             | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoScrollbar
             | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoScrollWithMouse;
 
         const ImGuiViewport* viewport = ImGui::GetMainViewport();
-		Application* app = Application::Get();
+        Application* app = Application::Get();
 
         ImGui::SetNextWindowPos(viewport->WorkPos);
         ImGui::SetNextWindowSize(viewport->WorkSize);
@@ -25,29 +25,29 @@ namespace ssgui {
     }
 
     void endMainWindow() {
-		ImGui::End();
-		ImGui::PopStyleVar();
-		ImGui::PopStyleColor();
+        ImGui::End();
+        ImGui::PopStyleVar();
+        ImGui::PopStyleColor();
     }
 
     std::string openFileDialogButton(const std::string& label, const char* extFilter, const char* startPath) {
         if (ImGui::Button(label.c_str())) {
-			return openFileDialog(extFilter, startPath);
-        }   
+            return openFileDialog(extFilter, startPath);
+        }
         return {};
     }
 
     std::string saveFileDialogButton(const std::string& label, const char* extFilter, const char* startPath) {
-		if (ImGui::Button(label.c_str())) {
-			return saveFileDialog(extFilter, startPath);
-		}   
-		return {};
+        if (ImGui::Button(label.c_str())) {
+            return saveFileDialog(extFilter, startPath);
+        }
+        return {};
     }
 
     Status progressBar(const std::string& label, f32 value, const ImVec2& size, ImU32 bgcol, ImU32 fgcol) {
-		ImGuiWindow* window = ImGui::GetCurrentWindow();
+        ImGuiWindow* window = ImGui::GetCurrentWindow();
         if (window->SkipItems) return Status_Error;
-        
+
         ImGuiContext& ctx = *GImGui;
         ImGuiStyle style = ctx.Style;
         ImGuiID id = window->GetID(label.c_str());
@@ -55,15 +55,15 @@ namespace ssgui {
         ImVec2 pos = window->DC.CursorPos;
         ImVec2 sz = size;
         sz.x -= style.FramePadding.x * 2;
-        
-        ImRect barBounds (pos, ImVec2(pos.x + sz.x, pos.y + sz.y));
+
+        ImRect barBounds(pos, ImVec2(pos.x + sz.x, pos.y + sz.y));
         ImGui::ItemSize(barBounds, style.FramePadding.y);
-		bool added = ImGui::ItemAdd(barBounds, id);
+        bool added = ImGui::ItemAdd(barBounds, id);
 
         if (!added) return Status_Error;
-        
+
         window->DrawList->AddRectFilled(barBounds.Min, ImVec2(pos.x + sz.x, barBounds.Max.y), bgcol);
         window->DrawList->AddRectFilled(barBounds.Min, ImVec2(pos.x + sz.x * value, barBounds.Max.y), fgcol);
-		return Status_Success;
+        return Status_Success;
     }
 }
