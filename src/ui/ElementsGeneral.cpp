@@ -53,17 +53,17 @@ namespace ssgui {
         ImGuiID id = window->GetID(label.c_str());
 
         ImVec2 pos = window->DC.CursorPos;
-        ImVec2 sz = size;
-        sz.x -= style.FramePadding.x * 2;
+        auto [width, height] = size;
+        width -= style.FramePadding.x * 2;
 
-        ImRect barBounds(pos, ImVec2(pos.x + sz.x, pos.y + sz.y));
+        ImRect barBounds(pos, ImVec2(pos.x + width, pos.y + height));
         ImGui::ItemSize(barBounds, style.FramePadding.y);
         bool added = ImGui::ItemAdd(barBounds, id);
 
         if (!added) return Status_Error;
 
-        window->DrawList->AddRectFilled(barBounds.Min, ImVec2(pos.x + sz.x, barBounds.Max.y), bgcol);
-        window->DrawList->AddRectFilled(barBounds.Min, ImVec2(pos.x + sz.x * value, barBounds.Max.y), fgcol);
+        window->DrawList->AddRectFilled(barBounds.Min, ImVec2(pos.x + width, barBounds.Max.y), bgcol);
+        window->DrawList->AddRectFilled(barBounds.Min, ImVec2(pos.x + width * value, barBounds.Max.y), fgcol);
         return Status_Success;
     }
 }

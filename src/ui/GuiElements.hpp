@@ -5,9 +5,9 @@
 #include "Style.hpp"
 
 namespace ssgui {
-	// alignment value for elements to center them horrizontally
+	// alignment constant for elements to center them horrizontally
 	static constexpr f32 ALLIGN_CENTER = 0.5f;
-	// alignment value for elements to align them to the right
+	// alignment constant for elements to align them to the right
 	static constexpr f32 ALLIGN_RIGHT = 1.0f;
 
 	/**

@@ -75,7 +75,7 @@ namespace ssgui {
 
         switch (result) {
             case NFD_ERROR:
-                PrintErr("Error while using save file dialog");
+                printErr("Error while using save file dialog");
                 exit(Status_Error);
                 break;
             case NFD_OKAY:
@@ -95,7 +95,7 @@ namespace ssgui {
 
         switch (result) {
             case NFD_ERROR:
-                PrintErr("Error while using save file dialog");
+                printErr("Error while using save file dialog");
                 exit(Status_Error);
                 break;
             case NFD_OKAY:

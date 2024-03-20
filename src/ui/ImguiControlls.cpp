@@ -17,7 +17,9 @@ namespace ssgui {
             Fonts.emplace("default-18px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 18.f));
             Fonts.emplace("default-20px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 20.f));
             Fonts.emplace("default-24px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 24.f));
+            Fonts.emplace("default-26px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 26.f));
             Fonts.emplace("default-30px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 30.f));
+            Fonts.emplace("default-36px", io.Fonts->AddFontFromFileTTF(defaultFontPath, 36.f));
         }
 
         style.Colors[ImGuiCol_Text]                  = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);

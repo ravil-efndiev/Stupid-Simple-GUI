@@ -11,7 +11,7 @@
 #include <optional>
 #include <stdlib.h>
 
-#define SS_ASSERT(condition, errorText) if (!(condition)) {PrintErr(errorText); exit(Status_Error);}
+#define SS_ASSERT(condition, errorText) if (!(condition)) {printErr(errorText); exit(Status_Error);}
 
 namespace ssgui {
     typedef int8_t  i8;
@@ -27,19 +27,31 @@ namespace ssgui {
     typedef float  f32;
     typedef double f64;
 
+    // exit status enum for different API functions
     enum Status {
         Status_Success = 0,
         Status_Error = 1,
     };
 
+    /**
+     * @brief prints formatted text to stdout with newline at the end
+     * @param fmt c-style format string
+     * @param ...args format arguments
+     */
     template <class... Args>
-    void Print(const std::string& fmt, Args&&... args) {
+    void print(const std::string& fmt, Args&&... args) {
         std::string fmtout = fmt + "\n";
         (void)printf(fmtout.c_str(), std::forward<Args>(args)...);
     }
 
+    /**
+     * @brief prints formatted text to stderr with newline at the end
+     * @param fmt c-style format string
+     * @param ...args format arguments
+     * @note funciton adds 'Error: ' prefix to distinguish errors
+     */
     template <class... Args>
-    void PrintErr(const std::string& fmt, Args&&... args) {
+    void printErr(const std::string& fmt, Args&&... args) {
         std::string fmterr = "Error: " + fmt + "\n";
         (void)fprintf(stderr, fmterr.c_str(), std::forward<Args>(args)...);
     }

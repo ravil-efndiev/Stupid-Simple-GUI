@@ -8,7 +8,7 @@ int main() {
     Application* app = Application::Get();
 
     if (!app) {
-        PrintErr("Application instance wasn't properly initialized");
+        printErr("Application instance wasn't properly initialized");
         return Status_Error;
     }
 
