@@ -33,7 +33,7 @@ namespace ssgui {
     void Image::loadFromFile(const std::string& path) {
         stbi_set_flip_vertically_on_load(true);
 
-        textureData = stbi_load(path.c_str(), &width, &height, &channels, 0);
+        u8* textureData = stbi_load(path.c_str(), &width, &height, &channels, 0);
         SS_ASSERT(textureData, "Image: unable to load texture from file")
 
         glGenTextures(1, &textureId);
@@ -58,7 +58,6 @@ namespace ssgui {
 
         this->channels = channels;
         dataFormat = channels == 4 ? GL_RGBA : GL_RGB;
-        textureData = data;
 
         glBindTexture(GL_TEXTURE_2D, textureId);
         glTexImage2D(GL_TEXTURE_2D, 0, dataFormat, width, height, 0, dataFormat, GL_UNSIGNED_BYTE, data);

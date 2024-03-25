@@ -6,7 +6,6 @@
 namespace ssgui {
     // style properties for buttons
     struct ButtonStyle {
-        // ImGui font for the button label
         ImFont* Font;
         // text color for the button
         std::optional<Vector4> Color = std::nullopt;
@@ -19,20 +18,26 @@ namespace ssgui {
 
         // background color when button is clicked
         std::optional<Vector4> ClickedColor = std::nullopt;
-
-        // button alignment on horizontal axis(0.0f - 1.0f)
         f32 Alignment = 0.f;
     };
 
     // style properties for text elements
     struct TextStyle {
-        // ImGui font for the text label
+        ImFont* Font;
+        std::optional<Vector4> Color = std::nullopt;
+        f32 Alignment = 0.f;
+    };
+
+    // style properties for text inputs elements
+    struct InputTextStyle {
         ImFont* Font;
 
         // Text Color
         std::optional<Vector4> Color = std::nullopt;
 
-        // text alignment on horizontal axis(0.0f - 1.0f)
+        // Background Color
+        std::optional<Vector4> BackgroundColor = std::nullopt;
         f32 Alignment = 0.f;
+        f32 Width = 0.f;
     };
 }

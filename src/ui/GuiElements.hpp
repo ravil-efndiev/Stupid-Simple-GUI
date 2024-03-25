@@ -6,9 +6,12 @@
 
 namespace ssgui {
 	// alignment constant for elements to center them horrizontally
-	static constexpr f32 ALLIGN_CENTER = 0.5f;
+	static constexpr f32 ALIGN_CENTER = 0.5f;
 	// alignment constant for elements to align them to the right
-	static constexpr f32 ALLIGN_RIGHT = 1.0f;
+	static constexpr f32 ALIGN_RIGHT = 1.0f;
+
+	// constant for renderign elements outside the screen
+	static constexpr f32 INVISIBLE_AREA_X = -10000.0f;
 
 	/**
 	 * @brief begins MainWindow element
@@ -87,6 +90,13 @@ namespace ssgui {
 	void alignWidget(const char* label, f32 alignment);
 
 	/**
+	 * @brief aligns labeled widget horrizontally
+	 * @param bouns widget width and height
+	 * @param alignment alignment on horizontal axis, (0.0f - 1.0f) where 0 is full left and 1 is full right
+	 */
+	void alignWidget(f32 bounds, f32 alignment);
+
+	/**
 	 * @brief ImGui button with custom style properties
 	 * @param label label of the button
 	 * @param size size of the button (set it to default to automatically size it)
@@ -112,4 +122,14 @@ namespace ssgui {
 	 * @param alignment alignment on horizontal axis, (0.0f - 1.0f) where 0 is full left and 1 is full right
 	 */
 	void textAligned(const char* text, f32 alignment);
+
+	/**
+	 * @brief text input with style properties
+	 * @param label display label 
+	 * @param string string to write into
+	 * @param style TextStyle to specify font and color
+	 * @param width prefered width, won't be set if 0
+	 */
+	void inputTextStyled(const std::string& label, std::string* string, const InputTextStyle& style);
+
 }

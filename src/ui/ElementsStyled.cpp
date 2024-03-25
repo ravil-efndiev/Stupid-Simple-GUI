@@ -17,6 +17,17 @@ namespace ssgui {
 			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
 	}
 
+	void alignWidget(f32 width, f32 alignment) {
+		ImGuiStyle& style = ImGui::GetStyle();
+
+		f32 winSize = ImGui::GetContentRegionAvail().x;
+		f32 size = width + style.FramePadding.x * 2.f;
+
+		f32 off = (winSize - size) * alignment;
+		if (off > 0.f)
+			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+	}
+
 	void textAligned(const char* text, f32 alignment) {
 		ImGui::Dummy({0.f, 0.f});
 		f32 winSize = ImGui::GetContentRegionAvail().x;
@@ -70,6 +81,25 @@ namespace ssgui {
 		textAligned(text.c_str(), style.Alignment);
 
 		if (style.Color) ImGui::PopStyleColor();
+		if (style.Font) ImGui::PopFont();
+    }
+
+    void inputTextStyled(const std::string& label, std::string* string, const InputTextStyle& style) {
+		if (style.Font)	ImGui::PushFont(style.Font);
+		if (style.Color) ImGui::PushStyleColor(ImGuiCol_Text, style.Color->asImgui());
+		if (style.BackgroundColor) ImGui::PushStyleColor(ImGuiCol_FrameBg, style.BackgroundColor->asImgui());
+		if (style.Width > 0) ImGui::PushItemWidth(style.Width);
+
+		ImGui::SetCursorPosX(INVISIBLE_AREA_X);
+		ImGui::InputText(label.c_str(), string);
+		f32 width = ImGui::GetItemRectSize().x;
+		ImGui::SetCursorPosX(0.f);
+		alignWidget(width, style.Alignment);
+		ImGui::InputText(label.c_str(), string);
+
+		if (style.Width > 0) ImGui::PopItemWidth();
+		if (style.Color) ImGui::PopStyleColor();
+		if (style.BackgroundColor) ImGui::PopStyleColor();
 		if (style.Font) ImGui::PopFont();
     }
 }

@@ -11,6 +11,9 @@
 #include <optional>
 #include <stdlib.h>
 
+#include <imgui.h>
+#include <misc/cpp/imgui_stdlib.h>
+
 #define SS_ASSERT(condition, errorText) if (!(condition)) {printErr(errorText); exit(Status_Error);}
 
 namespace ssgui {

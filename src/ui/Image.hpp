@@ -62,9 +62,6 @@ namespace ssgui {
         GLenum dataFormat, internalFormat;
         
         i32 width, height, channels;   
-
-        u8* textureData;
-
         std::string path = "";
     };
 }
