@@ -1,9 +1,7 @@
 #include "ImguiControlls.hpp"
 #include "OpenGLAPI.hpp"
 #include "General.hpp"
-#include <backends/imgui_impl_opengl3.h>
-#include <backends/imgui_impl_glfw.h>
-#include <GLFW/glfw3.h>
+#include <Dependencies.hpp>
 
 namespace ssgui {
     std::unordered_map<std::string, ImFont*> ImGuiControlls::Fonts;

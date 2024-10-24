@@ -1,7 +1,6 @@
 #include "Window.hpp"
 #include "OpenGLAPI.hpp"
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <Dependencies.hpp>
 
 namespace ssgui {
     Window::Window(u16 width, u16 height, const std::string& title) : title(title) {
