@@ -1,0 +1,3 @@
+/Users/Belokan/ssgui/test/CMakeFiles/ssgui_test.dir
+/Users/Belokan/ssgui/test/CMakeFiles/edit_cache.dir
+/Users/Belokan/ssgui/test/CMakeFiles/rebuild_cache.dir

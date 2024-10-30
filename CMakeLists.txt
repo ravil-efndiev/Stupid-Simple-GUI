@@ -42,12 +42,17 @@ target_link_libraries(ssgui
     ${CMAKE_CURRENT_SOURCE_DIR}/vendor/modules/nativefiledialog/build/lib/Release/x64/libnfd.a
 )
 
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
 set(CMAKE_BUILD_TYPE Release)
 
 if(APPLE)
     set(CMAKE_CXX_FLAGS "-Wall -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo -framework CoreFoundation -Wno-deprecated -Wno-unused-command-line-argument")
-elseif(UNIX)
+elseif(LINUX) 
     set(CMAKE_CXX_FLAGS "-Wall -Wno-deprecated -Wno-unused-command-line-argument")
 endif()
+
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O4")
